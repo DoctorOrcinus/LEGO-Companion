@@ -1,4 +1,4 @@
-# Doctor Orcinus LEGO Tweaks
+# Doctor Orcinus LEGO Tweaks (now on git)
 
 Ein Blender-Addon (ab Blender 4.0) für LEGO- und Stop-Motion-Animationsprojekte. Es sammelt mehrere Werkzeuge rund um organische Bewegungsverfeinerung, Stop-Motion-Timing, Transform-Bereinigung und Shader-Skalierung in einem Sidebar-Panel unter **View3D > Sidebar > Doctor Orcinus**.
 
