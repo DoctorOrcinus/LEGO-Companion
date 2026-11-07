@@ -1,6 +1,6 @@
-# Doctor Orcinus LEGO Tweaks (now on git)
+# LEGO Companion
 
-Ein Blender-Addon (ab Blender 4.0) für LEGO- und Stop-Motion-Animationsprojekte. Es sammelt mehrere Werkzeuge rund um organische Bewegungsverfeinerung, Stop-Motion-Timing, Transform-Bereinigung und Shader-Skalierung in einem Sidebar-Panel unter **View3D > Sidebar > Doctor Orcinus**.
+Ein Blender-Addon (ab Blender 4.0) für LEGO- und Stop-Motion-Animationsprojekte. Es sammelt mehrere Werkzeuge rund um organische Bewegungsverfeinerung, Stop-Motion-Timing, Transform-Bereinigung, Shader-Skalierung und den Import eines Floor-Generator-Objekts in einem Sidebar-Panel unter **View3D > Sidebar > LEGO Companion**.
 
 ## Inhalt
 
@@ -11,6 +11,7 @@ Ein Blender-Addon (ab Blender 4.0) für LEGO- und Stop-Motion-Animationsprojekte
   - [Node Scale Setter](#node-scale-setter)
   - [MecaFace Scale Patcher](#mecaface-scale-patcher)
   - [Shader Patcher (MMUA)](#shader-patcher-mmua)
+- [Floor Generator Import](#floor-generator-import)
 
 ---
 
@@ -54,6 +55,7 @@ Setzt global den Wert einer benannten "Scale"-Value-Node im aktiven Material all
 - Sucht pro Objekt automatisch nach einer `ShaderNodeValue`-Node mit dem Label "Scale".
 - Setzt den eingegebenen Zielwert direkt am Node-Output.
 - Gibt zurück, bei wie vielen Objekten die Node gefunden bzw. nicht gefunden wurde.
+- Standardwert: 0.01.
 
 ### MecaFace Scale Patcher
 
@@ -64,6 +66,7 @@ Patcht gezielt Node-Gruppen mit dem Basisnamen **MecaFace.Material** in allen Ma
 - **Lock-Mechanismus**: Jeder gepatchte Node-Tree wird über eine Custom Property markiert, damit er nicht versehentlich mehrfach gepatcht wird.
 - **Force Repatch**-Option, um die Sperre bei Bedarf zu ignorieren und erneut zu patchen (z. B. bei geändertem Scale-Wert).
 - Ausführliches Konsolen-Log inkl. Anzahl gepatchter und übersprungener (gesperrter) Materialien.
+- Standardwert: 0.01.
 
 ### Shader Patcher (MMUA)
 
@@ -74,17 +77,38 @@ Rekursiver Shader-Patcher für MMUA-Materialien, der mehrere Teilbereiche gleich
 - **SSS-Depth-Patch**: Skaliert den "Sss Depth"-Eingang in `mmua_base_solid`-Node-Gruppen rekursiv mit dem Scale-Faktor.
 - **Triplanar-Normalize-Patch**: Fügt bei Bedarf eine fehlende Normalize-Node zwischen Cross-Product- und Scale-Node in `thorn_triplanar normal map`-Gruppen ein, um korrektes Normal-Mapping bei Skalierung sicherzustellen.
 - Erkennt bereits vorhandene automatische Patch-Nodes (Label "Scale Multiply (auto)") und aktualisiert deren Wert statt sie erneut einzufügen.
-- **MMUA Object Select**: Wählt alle Mesh-Objekte in der Szene aus, deren Material die Node-Gruppe `mmua_base_solid` enthält – praktisch, um vor dem Patchen schnell alle relevanten Objekte zu markieren.
+- **Select MMUA Objects**: Wählt alle Mesh-Objekte in der Szene aus, deren Material die Node-Gruppe `mmua_base_solid` enthält – Button liegt direkt über dem "Shader patchen"-Button, um vor dem Patchen schnell alle relevanten Objekte zu markieren.
 - Zeigt eine Liste der aktuell ausgewählten Mesh-Objekte (bis 10, mit Zähler für weitere) direkt im Panel an.
 - Ausführliches Konsolen-Log für jeden Patch-Durchlauf mit Anzahl der bearbeiteten Einträge pro Objekt.
+- Standardwert: 0.01.
+
+## Floor Generator Import
+
+Importiert mit einem Klick ein vorgefertigtes LEGO-Parkettboden-Objekt (Geometry-Nodes-Setup) aus einer im Addon gebündelten `.blend`-Datei, ohne dass die Quelldatei manuell geöffnet werden muss.
+
+- Die Quelldatei liegt im Addon-Ordner unter `assets/LEGO Floor Generator_wood_01.blend`, das Zielobjekt heißt `LEGO Floor v01`.
+- Beim Import wird das Objekt per Append (nicht Link) aus der gebündelten Datei geladen und am 3D-Cursor in der aktuellen Szene platziert.
+- **Shader Scale**-Feld (Standardwert 0.01): Der eingegebene Wert wird direkt (ohne Berechnung) in die Scale-Value-Node auf der ersten Ebene jedes Materials des importierten Objekts eingetragen.
+- Keine Prüf- oder Lock-Logik – das Objekt wird bei jedem Klick neu importiert.
+- Rein als Import-Werkzeug gedacht; die Parameter des Floor-Generators selbst (Breite, Länge, Versatz) werden aktuell nicht über das Addon gesteuert.
 
 ---
 
 ## Installation
 
-1. Datei über `Edit > Preferences > Add-ons > Install...` in Blender laden.
-2. Addon aktivieren.
-3. Panel öffnen über `View3D > Sidebar (N) > Doctor Orcinus`.
+Da das Addon eine gebündelte `.blend`-Datei benötigt, wird es als **Ordner-Paket** installiert, nicht als einzelne `.py`-Datei:
+
+```
+lego_companion/
+├── __init__.py
+└── assets/
+    └── LEGO Floor Generator_wood_01.blend
+```
+
+1. Ordner `lego_companion/` als ZIP packen (von innen, sodass `__init__.py` direkt im Archiv-Root des Ordners liegt).
+2. In Blender: `Edit > Preferences > Add-ons > Install...` → ZIP-Datei auswählen.
+3. Addon in der Liste aktivieren (Häkchen setzen).
+4. Panel öffnen über `View3D > Sidebar (N) > LEGO Companion`.
 
 ## Kompatibilität
 
