@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LEGO Companion
 
 Ein Blender-Addon (ab Blender 4.0) für LEGO- und Stop-Motion-Animationsprojekte. Es sammelt mehrere Werkzeuge rund um organische Bewegungsverfeinerung, Stop-Motion-Timing, Transform-Bereinigung, Shader-Skalierung und den Import eines Floor-Generator-Objekts in einem Sidebar-Panel unter **View3D > Sidebar > LEGO Companion**.
@@ -113,3 +114,7 @@ lego_companion/
 ## Kompatibilität
 
 Getestet mit Blender 4.0+.
+=======
+# LEGO-Companion
+A Blender add-on (for Blender 4.0 and above) for LEGO and stop-motion animation projects. It brings together several tools for organic motion refinement, stop-motion timing, transform cleanup, shader scaling, and importing a floor generator object, all within a sidebar panel under View3D > Sidebar > LEGO Companion.
+>>>>>>> 4c818b671fef0d5621ebeae8ed52063bc5ceeb09
