@@ -12,6 +12,7 @@ Ein Blender-Addon (ab Blender 4.0) für LEGO- und Stop-Motion-Animationsprojekte
   - [MecaFace Scale Patcher](#mecaface-scale-patcher)
   - [Shader Patcher (MMUA)](#shader-patcher-mmua)
 - [Floor Generator Import](#floor-generator-import)
+- [Geplante QoL-Features](#geplante-qol-features)
 
 ---
 
@@ -91,6 +92,19 @@ Importiert mit einem Klick ein vorgefertigtes LEGO-Parkettboden-Objekt (Geometry
 - **Shader Scale**-Feld (Standardwert 0.01): Der eingegebene Wert wird direkt (ohne Berechnung) in die Scale-Value-Node auf der ersten Ebene jedes Materials des importierten Objekts eingetragen.
 - Keine Prüf- oder Lock-Logik – das Objekt wird bei jedem Klick neu importiert.
 - Rein als Import-Werkzeug gedacht; die Parameter des Floor-Generators selbst (Breite, Länge, Versatz) werden aktuell nicht über das Addon gesteuert.
+
+---
+
+## Geplante QoL-Features
+
+Folgende Verbesserungen sind für kommende Versionen geplant:
+
+- **Dauerhafte Standardwerte & globale Scale-Eingabe**: Default-Werte aller Scale-Felder dauerhaft über die Addon-Preferences setzbar; zusätzlich eine globale Scale-Eingabe, die alle Scale-Felder (Node Scale, MecaFace Scale, MMUA Scale Factor, Floor Shader Scale) auf einmal setzt.
+- **Organic Motion: Presets & Re-Roll-Button**: Speicherbare Presets für die Noise-Einstellungen (Kamera/Bones) sowie ein Re-Roll-Button, der nur den zufälligen Phase-/Offset-Wert der Noise-Modifier neu würfelt, ohne Scale und Strength zu verändern.
+- **Ergebnisfeedback im Panel**: Zusammenfassung des letzten Operator-Laufs (z. B. gepatchte Materialien, entfernte/erstellte Modifier, gefundene/fehlende Scale-Nodes) direkt im Panel anzeigen, statt sie nur in die Blender-Konsole zu schreiben.
+- **Bake to Keyframes bei Animation on 2s**: Option, das gestufte Stop-Motion-Timing in echte Keyframes zu backen (Sampling im Step-Raster, danach Modifier entfernen), damit die Optik auch bei FBX-Export, Game-Engines oder anderen Tools erhalten bleibt – der Modifier-Weg bleibt als nicht-destruktive Variante erhalten.
+- **Patch-Status sichtbar machen**: Anzeige des aktuellen Patch-Zustands im Panel – beim MecaFace Scale Patcher (z. B. „3 von 5 Materialien gepatcht, Scale 0.01", ausgelesen aus den Custom Properties der Node-Trees) sowie beim MMUA-Shader-Patcher (vorhandene „Scale Multiply (auto)"-Nodes).
+- **Node Scale Setter: alle Material-Slots**: Option **„All Slots"**, um die Scale-Node in allen Material-Slots der ausgewählten Objekte zu setzen, statt nur im aktiven Material.
 
 ---
 
